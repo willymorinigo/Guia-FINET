@@ -30,7 +30,10 @@ export async function fetchStockData(tickers: string[]) {
 
   try {
     const prompt = `You are a financial data assistant. Search Invertir Online (https://www.invertironline.com) for the latest real-time stock price and target price (average analyst estimate) for these tickers: ${tickers.join(", ")}. 
-    For Argentine assets (AL30, GD30, GGAL, YPFD, etc.), look for current market prices in ARS and verify the Dólar MEP rate. 
+    IMPORTANT: 
+    - For Argentine assets (AL30, GD30, GGAL, YPFD, PAMP, MELI, etc.), fetch the price in ARS (Argentine Pesos) as quoted on IOL. 
+    - For Global assets (AAPL, MSFT, etc.), fetch the price in USD.
+    - Verify the current Dólar MEP rate if possible. 
     Return a JSON array where each object has ticker, price, and targetPrice.`;
 
     const response = await ai.models.generateContent({

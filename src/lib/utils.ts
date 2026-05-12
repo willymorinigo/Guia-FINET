@@ -10,6 +10,7 @@ export function formatCurrency(value: number) {
     style: 'currency',
     currency: 'ARS',
     minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
   }).format(value);
 }
 
@@ -17,6 +18,7 @@ export function formatCompactNumber(value: number) {
   return new Intl.NumberFormat('es-AR', {
     notation: 'compact',
     compactDisplay: 'short',
+    maximumFractionDigits: 1,
   }).format(value);
 }
 

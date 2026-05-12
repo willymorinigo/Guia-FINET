@@ -287,7 +287,9 @@ export default function App() {
             <div className="flex gap-6 items-center text-sm border-l border-slate-100 pl-6">
               <div className="text-right">
                 <p className="text-[9px] text-slate-400 uppercase font-black tracking-tighter">TC MEP Referencia</p>
-                <p className="text-[#cc0] font-bold text-base">${TC_MEP.toLocaleString()}</p>
+                <p className="text-[#cc0] font-bold text-base">
+                  {TC_MEP.toLocaleString('es-AR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                </p>
               </div>
               <div className="text-right">
                 <p className="text-[9px] text-slate-400 uppercase font-black tracking-tighter">Bolsa Argentina</p>
@@ -392,7 +394,7 @@ export default function App() {
                           {stock.baseCurrency === 'USD' ? formatCurrency(stock.price * TC_MEP) : formatCurrency(stock.price)}
                         </div>
                         <div className="text-[9px] font-bold text-slate-400 uppercase mt-0.5">
-                          USD {stock.baseCurrency === 'USD' ? stock.price.toFixed(2) : (stock.price / TC_MEP).toFixed(2)} MEP
+                          USD {stock.baseCurrency === 'USD' ? stock.price.toLocaleString('es-AR', { minimumFractionDigits: 2 }) : (stock.price / TC_MEP).toLocaleString('es-AR', { minimumFractionDigits: 2 })} MEP
                         </div>
                         <div className="text-[10px] font-bold text-amber-600 uppercase tracking-widest mt-1">Esperar Soporte</div>
                      </div>
@@ -446,16 +448,16 @@ export default function App() {
                     <div className="flex items-baseline gap-2">
                       <div className="flex flex-col">
                         <span className="text-[9px] font-black text-green-600 uppercase">Coloc.</span>
-                        <span className="text-2xl font-black text-slate-800">19.9%</span>
+                        <span className="text-2xl font-black text-slate-800">19,9%</span>
                       </div>
                       <div className="h-8 w-px bg-slate-100 mx-1" />
                       <div className="flex flex-col">
                         <span className="text-[9px] font-black text-red-600 uppercase">Tomad.</span>
-                        <span className="text-2xl font-black text-slate-800">21.5%</span>
+                        <span className="text-2xl font-black text-slate-800">21,5%</span>
                       </div>
                     </div>
                   ) : (
-                    <p className="text-3xl font-black text-slate-800">{currentStats.avgDividend.toFixed(2)}%</p>
+                    <p className="text-3xl font-black text-slate-800">{currentStats.avgDividend.toLocaleString('es-AR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}%</p>
                   )}
                   <p className="text-[9px] font-bold text-slate-500 mt-3 uppercase tracking-wider">
                     {activeMarket === 'Argentina' ? 'TNA Vigente (Estimada)' : 'Dividendos promedio'}
@@ -537,16 +539,20 @@ export default function App() {
                           </div>
                           <div className="text-[10px] text-slate-400 font-medium tracking-tight">
                             USD {stock.baseCurrency === 'USD' 
-                              ? stock.price.toFixed(2) 
-                              : (stock.price / TC_MEP).toFixed(2)} MEP
+                              ? stock.price.toLocaleString('es-AR', { minimumFractionDigits: 2 }) 
+                              : (stock.price / TC_MEP).toLocaleString('es-AR', { minimumFractionDigits: 2 })} MEP
                           </div>
                         </td>
                         <td className="px-4 py-5">
                           <div className="font-black text-green-600 flex items-center gap-1">
                             <TrendingUp size={14} />
-                            +{((stock.targetPrice / stock.price - 1) * 100).toFixed(0)}%
+                            +{Math.round((stock.targetPrice / stock.price - 1) * 100).toLocaleString('es-AR')}%
                           </div>
-                          <div className="text-[9px] text-slate-400 font-bold uppercase">Obj: {stock.baseCurrency === 'USD' ? (stock.targetPrice * TC_MEP).toLocaleString() : stock.targetPrice.toLocaleString()}</div>
+                          <div className="text-[9px] text-slate-400 font-bold uppercase">
+                            Obj: {stock.baseCurrency === 'USD' 
+                              ? (stock.targetPrice * TC_MEP).toLocaleString('es-AR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) 
+                              : stock.targetPrice.toLocaleString('es-AR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                          </div>
                         </td>
                         <td className="px-2 py-5 font-bold text-slate-700">
                           <div className="flex items-center gap-1">
@@ -676,7 +682,7 @@ export default function App() {
                             {selectedStock.baseCurrency === 'USD' ? formatCurrency(selectedStock.price * TC_MEP) : formatCurrency(selectedStock.price)}
                           </div>
                           <div className="text-[10px] text-slate-500 font-medium mt-1">
-                            Equivale a <span className="font-bold text-slate-700">USD {selectedStock.baseCurrency === 'USD' ? selectedStock.price.toFixed(2) : (selectedStock.price / TC_MEP).toFixed(2)}</span> Dólar MEP
+                            Equivale a <span className="font-bold text-slate-700">USD {selectedStock.baseCurrency === 'USD' ? selectedStock.price.toLocaleString('es-AR', { minimumFractionDigits: 2 }) : (selectedStock.price / TC_MEP).toLocaleString('es-AR', { minimumFractionDigits: 2 })}</span> Dólar MEP
                           </div>
                         </div>
                         <div className="bg-slate-50 p-6 rounded-xl border border-slate-100">
